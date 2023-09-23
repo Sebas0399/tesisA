@@ -1,0 +1,58 @@
+[
+  {
+    "texto": "El sol briya en el cielo azul. Los pájaros cantan alegremente en los árboles. Los niños juegan en el parque y ríen con felicidad.",
+    "indiceIncorrecto": 2
+  },
+  {
+    "texto": "La luna ilumina la noche oscura. El viento sopla entre las hojas de los árboles. Un búho aúlla en la distancia, mirando hacia en el boske.",
+    "indiceIncorrecto": 25
+  },
+  {
+    "texto": "La plalla es un lugar de paz y tranquilidad. Las olas del mar rompen suavemente en la orilla. La arena caliente se desliza entre los dedos de los pies.",
+    "indiceIncorrecto": 2
+  },
+  {
+    "texto": "El libro abierto indica un mundo de aventuras. Las letras dan vida a personajes y lujares. La imaginación vuela libremente en cada página.",
+    "indiceIncorrecto": 16
+  },
+  {
+    "texto": "El aroma del pan recién horneado llena la cocina. La masa es suave y elástica bajo las manos expertas del panadero. Cada bocado es una delicia.",
+    "indiceIncorrecto": 0
+  },
+  {
+    "texto": "Érase una vez un ratón, dentro de una caja de kartón.",
+    "indiceIncorrecto": 11
+  },
+  {
+    "texto": "El pastelero cocina un rico pastel. Los niños comen unos deliciosos elados  despues de jugar. La niña juega con su barbie en el cuarto de juegos",
+    "indiceIncorrecto": 11
+  },
+  {
+    "texto": " El humo sube al cielo. La llubia baja a la tierra.",
+    "indiceIncorrecto": 7
+  },
+  {
+    "texto": " Ese hambre no tiene mucha barca. El vestido de la señora es de color amarrillo.",
+    "indiceIncorrecto": 2
+  },
+  {
+    "texto": "En la caza de mi tia Clara me comi un pastel debajo de un gran arbol de kiwis",
+    "indiceIncorrecto": 3
+  },
+  {
+    "texto": "El sol salio para secar toda el agua que dego la lluvia ayer. Ayer en toda la noche no dego de llover.",
+    "indiceIncorrecto": 20
+  },
+  {
+    "texto": "Hoy vamos a ir a jugar dominó. Queiro pedirte un favor amigo mío",
+    "indiceIncorrecto": 8
+  },
+  {
+    "texto": "Los dinosaurios eran animales que vivieron hace musho tiempo. Un fosil de un dinosaurio fue encontrado en Ecuador.",
+    "indiceIncorrecto": 8
+  },
+  {
+    "texto": "Todas las mañanas mi día y mi mamá ponen musica en la mañana. En la noche mi mamá ve la television y se va a descanzar.",
+    "indiceIncorrecto": 5
+  }
+]

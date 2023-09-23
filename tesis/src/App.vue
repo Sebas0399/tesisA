@@ -3,6 +3,9 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/ahorcado">Ahorcado</router-link>
     <router-link to="/memoria">Memoria</router-link>
+    <router-link to="/lectura">Lectura</router-link>
+    <router-link to="/audio">Audio</router-link>
+    <router-link to="/informe">Informe</router-link>
 
   </nav>
   <router-view/>
