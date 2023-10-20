@@ -1,0 +1,28 @@
+{
+    "palabras": [
+      {
+        "original": "Conloqueexplicaste",
+        "segmentada": "Con/lo/que/explicaste"
+      },
+      {
+        "original": "Esperounqueesteesfácil",
+        "segmentada": "Espero/un/que/este/es/fácil"
+      },
+      {
+        "original": "Voyahacertudeseo",
+        "segmentada": "Voya/hacer/tu/deseo"
+      },
+      {
+        "original": "Asegúratedequecomprendan",
+        "segmentada": "Asegúrate/de/que/comprendan"
+      },
+      {
+        "original": "Esuntrabajoenconjunto",
+        "segmentada": "Es/un/trabajo/en/conjunto"
+      },
+      {
+        "original": "Practicaránhastaentender",
+        "segmentada": "Practicarán/hasta/entender"
+      }
+    ]
+  }

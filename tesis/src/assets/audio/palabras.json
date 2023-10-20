@@ -1,0 +1,188 @@
+{ 
+    "palabras": [
+      {
+        "Palabra": "BRUJA",
+        "Opciones": "vru , gru, tru, bru",
+        "Respuesta": "bru"
+      },
+      
+      {
+        "Palabra": "CLAVO",
+        "Opciones": "vo, bo, fo,mo",
+        "Respuesta": "vo"
+      },
+
+      {
+        "Palabra": "FLAUTA",
+        "Opciones": "plau, mau, nau,flau",
+        "Respuesta": "flau"
+      },
+
+      {
+        "Palabra": "SATURNO",
+        "Opciones": "za,sa,ma,ca",
+        "Respuesta": "sa"
+      },
+
+      {
+        "Palabra": "ZAPATO",
+        "Opciones": "sa,xa,ca,za",
+        "Respuesta": "za"
+      },
+
+
+      {
+        "Palabra": "HELADO",
+        "Opciones": "e,le,ge,he",
+        "Respuesta": "he"
+      },
+
+      {
+        "Palabra": "HADA",
+        "Opciones": "a,ha,ga,ja",
+        "Respuesta": "ha"
+      },
+
+
+      {
+        "Palabra": "FLAMENCO",
+        "Opciones": "ko,xo,so,co",
+        "Respuesta": "co"
+      },
+
+      {
+        "Palabra": "VASO",
+        "Opciones": "ba,ma,ca,va",
+        "Respuesta": "va"
+      },
+
+      {
+        "Palabra": "TELEFONO",
+        "Opciones": "po, bo,zo,fo",
+        "Respuesta": "fo"
+      },
+
+      {
+        "Palabra": "JUGUETE",
+        "Opciones": "gui,je,ge,gue",
+        "Respuesta": "gue"
+      },
+
+      {
+        "Palabra": "EJERCITO",
+        "Opciones": "ger,fer,mer,jer",
+        "Respuesta": "jer"
+      },
+
+      {
+        "Palabra": "CALABAZA",
+        "Opciones": "va,xa,ba,wa",
+        "Respuesta": "ba"
+      },
+
+      {
+        "Palabra": "ROBOT",
+        "Opciones": "to,lo,no,ro",
+        "Respuesta": "ro"
+      },
+
+      {
+        "Palabra": "FERROCARRIL",
+        "Opciones": "ro, jo,ño,rro",
+        "Respuesta": "rro"
+      },
+
+      {
+        "Palabra": "CASTOR",
+        "Opciones": "tor,lor,kor, mor",
+        "Respuesta": "tor"
+      },
+
+      {
+        "Palabra": "GELATINA",
+        "Opciones": "je,he,gue,ge",
+        "Respuesta": "ge"
+      },
+
+      {
+        "Palabra": "LLUVIA",
+        "Opciones": "yu,lu,xu,llu",
+        "Respuesta": "llu"
+      },
+
+      {
+        "Palabra": "RANA",
+        "Opciones": "la, na, ma,ra",
+        "Respuesta": "ra"
+      },
+
+      {
+        "Palabra": "LAPIZ",
+        "Opciones": "piz,pis, liz, nis",
+        "Respuesta": "piz"
+      },
+
+      {
+        "Palabra": "JINETE",
+        "Opciones": "gi, gui, di,ji",
+        "Respuesta": "ji"
+      },
+
+      {
+        "Palabra": "GUITARRA",
+        "Opciones": "jui,gui,ji, hi",
+        "Respuesta": "gui"
+      },
+
+
+      {
+        "Palabra": "VASIJA",
+        "Opciones": "la, ga, xa,ja",
+        "Respuesta": "ja"
+      },
+
+
+      {
+        "Palabra": "YATE",
+        "Opciones": "lla, xa, ra,ya",
+        "Respuesta": "ya"
+      },
+
+      {
+        "Palabra": "LIBRO",
+        "Opciones": "cro ,bro, vro , gro",
+        "Respuesta": "bro"
+      },
+
+      {
+        "Palabra": "LLAVE",
+        "Opciones": " ya, ga , xa,lla",
+        "Respuesta": "lla"
+      },
+
+
+      {
+        "Palabra": "ALFABETO",
+        "Opciones": "la, ba, pa, fa",
+        "Respuesta": "fa"
+      },
+
+      {
+        "Palabra": "BALLENA",
+        "Opciones": "ye,lle, gue,xe",
+        "Respuesta": "lle"
+      },
+
+      {
+        "Palabra": "TIGRE",
+        "Opciones": "li, pi, vi,ti",
+        "Respuesta": "ti"
+      },
+
+      {
+        "Palabra": "JIRAFA",
+        "Opciones": "gui,yi, gi,ji",
+        "Respuesta": "ji"
+      }
+    ]
+  }

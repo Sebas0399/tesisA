@@ -2,12 +2,9 @@
   <div>
     <div v-if="oracionActual">
       <p>
-        <span
-          v-for="(palabra, indice) in oracionActual.palabras"
-          :key="indice"
+        <span v-for="(palabra, indice) in oracionActual.palabras" :key="indice"
           :class="{ 'palabra-incorrecta': indice === indicePalabraIncorrecta }"
-          @click="seleccionarPalabraIncorrecta(indice)"
-        >
+          @click="seleccionarPalabraIncorrecta(indice)">
           {{ palabra }}&nbsp;
         </span>
       </p>
@@ -42,7 +39,7 @@ export default {
       this.indicePalabraIncorrecta = indice;
     },
     verificarRespuesta() {
-      console.log(this.indicePalabraIncorrecta,this.oracionActual.indiceIncorrecto)
+      console.log(this.indicePalabraIncorrecta, this.oracionActual.indiceIncorrecto)
       if (this.indicePalabraIncorrecta !== null) {
         if (this.indicePalabraIncorrecta === this.oracionActual.indiceIncorrecto) {
           this.puntuacion++;
@@ -91,5 +88,21 @@ export default {
   font-style: bold;
   border: 2px solid black;
   border-radius: 5px;
+  background-color: blue;
+}
+
+button {
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+
+}
+
+button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+span{
+  font-size: 30px;
 }
 </style>

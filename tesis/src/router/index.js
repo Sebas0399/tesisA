@@ -5,12 +5,18 @@ import Memoria from '../modules/memoria/Juego.vue'
 import Lectura from '../modules/lectura/Lectura.vue'
 import Audio from '../modules/audio/Juego.vue'
 import Informe from '../modules/informe/Informe.vue'
+import Segmentacion from '../modules/lecturaNuevo/Lectura.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/segmentacion',
+    name: 'segmentacion',
+    component: Segmentacion
   },
   {
     path: '/ahorcado',

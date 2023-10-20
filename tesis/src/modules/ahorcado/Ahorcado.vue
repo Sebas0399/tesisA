@@ -2,17 +2,18 @@
   <div class="contenedor">
     <div class="tablero">
       <h1>Juego del ahorcado</h1>
-      <h2>Intentos Restantes: {{ this.intentos }}</h2>
-      <button @click="disableAll"> Desabilitar</button>
+      <h2>Intentos Restantes: </h2>
+      <Knob v-model="intentosTotales"  :max="5" :step="-1" readonly valueColor="MediumTurquoise" rangeColor="SlateGray" />
+
       <div class="palabra">
-        <span v-for="(letra, indice) in palabraOculta" :key="indice"> {{ letra }} </span>
+        <span v-for="(letra, indice) in palabraOculta" :key="indice">{{ letra }}</span>
       </div>
 
       <div class="grilla">
-
         <!-- Teclado virtual -->
         <div class="teclado">
-          <button :id="letra" v-for="letra in alfabeto" :key="letra" @click="obtenerLetra(letra)">
+          <button :id="letra" v-for="letra in alfabeto" :key="letra" @click="obtenerLetra(letra)"
+            :disabled="tecladoDeshabilitado">
             {{ letra }}
           </button>
         </div>
@@ -23,12 +24,7 @@
     </div>
   </div>
   <div class="fin" v-if="fin">
-    <router-link to="/memoria">
-
-      <button>
-        Siguiente
-      </button>
-    </router-link>
+    <button @click="siguientePalabra" class="siguiente">Siguiente</button>
   </div>
 </template>
 
@@ -40,51 +36,55 @@ export default {
     return {
       aciertos: 0,
       imagenActual: "assets/flor/est1.png",
-      palabra: null, // La palabra actual
-      intentos: 5,
+      palabra: null,
+      intentosTotales: 5,
       alfabeto: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
       letraSeleccionada: "",
       numParticulas: 10,
       errores: 0,
       fin: false,
-      palabraOculta: [] // Agregamos palabraOculta como propiedad de datos
+      palabraOculta: [],
+      palabrasAdivinar: [],
+      palabraActualIndex: 0,
+      tecladoDeshabilitado: false,
+      contadorCorrecto: 0,
     };
   },
   created() {
     this.cargarPalabras();
-   
   },
- 
-
   methods: {
+    obtenerPalabrasAleatorias(cantidad,palabras) {
+      const palabrasAleatorias = [];
+      for (let i = 0; i < cantidad; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * palabras.length);
+        palabrasAleatorias.push(palabras[indiceAleatorio]);
+      }
+      return palabrasAleatorias;
+    },
     cargarPalabras() {
-      axios.get('/assets/ahorcado/palabras.json') // Ruta relativa a la carpeta public
+      axios.get('/assets/ahorcado/palabras.json')
         .then(response => {
           const palabras = response.data.palabras;
-          this.palabra = this.obtenerPalabraAleatoria(palabras);
+          this.palabrasAdivinar = this.obtenerPalabrasAleatorias(5,palabras);
+          this.palabra = this.palabrasAdivinar[this.palabraActualIndex];
           this.palabraOculta = Array(this.palabra.length).fill("_");
+          console.log(this.palabrasAdivinar)
         })
         .catch(error => {
           console.error('Error cargando las palabras:', error);
         });
     },
-    obtenerPalabraAleatoria(palabras) {
-      const indiceAleatorio = Math.floor(Math.random() * palabras.length);
-      return palabras[indiceAleatorio];
-    },
     obtenerLetra(letra) {
-
       if (this.palabra.includes(letra)) {
         this.palabra.split("").forEach((elemento, i) => {
           if (elemento === letra) {
             document.getElementById(letra).style.backgroundColor = 'green'
             document.getElementById(letra).style.color = 'white'
             document.getElementById(letra).disabled = true
-
             this.palabraOculta[i] = letra
             this.aciertos++;
           }
-
         });
       }
       else {
@@ -92,52 +92,87 @@ export default {
         document.getElementById(letra).style.color = 'white'
         document.getElementById(letra).disabled = true
         this.errores++;
-        this.intentos--;
+        this.intentosTotales--;
+        if (this.intentosTotales === 0) {
+          this.disableAll();
+          this.fin = true
+          //this.siguientePalabra();
+        }
       }
       if (!this.palabraOculta.includes("_")) {
-        //window.alert("¡Ganaste! :D")
         this.fin = true
         this.disableAll()
         this.imagenActual = "assets/flor/est5.png"
-        return
-      }
-
-      if (this.intentos === 0) {
-       // window.alert("¡Perdiste! :c")
-        this.disableAll()
+        this.contadorCorrecto++
         return
       }
       switch (this.aciertos) {
-
         case 1:
           this.imagenActual = "assets/flor/est2.png"
-
-          break; case 2:
-          this.imagenActual = "assets/flor/est3.png"
-
-          break; case 3:
-          this.imagenActual = "assets/flor/est4.png"
-          break; case this.palabra.length:
-          this.imagenActual = "assets/flor/est5.png"
-          
           break;
-
+        case 2:
+          this.imagenActual = "assets/flor/est3.png"
+          break;
+        case 3:
+          this.imagenActual = "assets/flor/est4.png"
+          break;
+        case this.palabra.length:
+          this.imagenActual = "assets/flor/est5.png"
+          break;
         default:
           break;
       }
     },
-    disableAll(){
-      document.getElementById("A").disabled=true
+    disableAll() {
+      document.getElementById("A").disabled = true
       for (let index = 0; index < this.alfabeto.length; index++) {
-        const element =  this.alfabeto[index];
-        document.getElementById(element).disabled=true
+        const element = this.alfabeto[index];
+        document.getElementById(element).disabled = true
       }
-     // document.getElementById()
+      this.tecladoDeshabilitado = true;
+    },
+    siguientePalabra() {
+      this.palabraActualIndex++;
+      if (this.palabraActualIndex < this.palabrasAdivinar.length) {
+        this.palabra = this.palabrasAdivinar[this.palabraActualIndex];
+        this.palabraOculta = Array(this.palabra.length).fill("_");
+        this.intentosTotales = 5;
+        this.aciertos = 0;
+        this.errores = 0;
+        this.fin = false;
+        this.imagenActual = "assets/flor/est1.png";
+        this.enableAll();
+        this.resetTeclado();
+        this.tecladoDeshabilitado = false;
+      } else {
 
+        const data = {
+          ahorcado: this.contadorCorrecto * 10
+        };
+        const jsonData = JSON.stringify(data);
+        localStorage.setItem('informeAhorcado', jsonData);
+        window.alert(this.contadorCorrecto)
+        this.$router.push('/memoria')
+
+      }
+    },
+    enableAll() {
+      for (let index = 0; index < this.alfabeto.length; index++) {
+        const element = this.alfabeto[index];
+        document.getElementById(element).disabled = false;
+      }
+    },
+    resetTeclado() {
+      for (let index = 0; index < this.alfabeto.length; index++) {
+        const element = this.alfabeto[index];
+        document.getElementById(element).style.backgroundColor = "white";
+        document.getElementById(element).style.color = "black";
+      }
     }
   }
 };
 </script>
+
 
 <style scoped>
 .grilla {
@@ -173,7 +208,8 @@ export default {
 
   background-color: aqua;
 }
-.teclado button:disabled{
+
+.teclado button:disabled {
   background-color: grey;
 }
 
@@ -192,54 +228,24 @@ span {
   margin: 10px;
 }
 
-.victoria {
-  position: relative;
-  height: 300px;
-  /* Ajusta la altura según tus necesidades */
-}
 
-.particula {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: red;
-  /* Color de las partículas */
-  border-radius: 50%;
-  opacity: 0;
-  animation: subir 1s infinite;
-}
 
-@keyframes subir {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
 
-  100% {
-    transform: translateY(-200px);
-    /* Altura a la que suben las partículas */
-    opacity: 0;
-  }
-}
-
-/* Ajusta la posición de cada partícula según sea necesario */
-.particula:nth-child(1) {
-  left: 50%;
-  transform: translateX(-50%);
-  animation-delay: 0.4s;
-}
-
-.particula:nth-child(2) {
-  left: 30%;
-  animation-delay: 0.6s;
-}
-
-.particula:nth-child(3) {
-  left: 70%;
-  animation-delay: 0.6s;
-}
 
 img {
   width: 300px;
 }
+.siguiente{
+ 
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+
+}
+
+.siguiente:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+}
+
 </style>
