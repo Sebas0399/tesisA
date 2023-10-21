@@ -1,5 +1,7 @@
 <template>
   <nav>
+   
+
     <router-link to="/">Home</router-link> |
     <router-link to="/ahorcado">Ahorcado</router-link>
     <router-link to="/memoria">Memoria</router-link>
