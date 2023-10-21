@@ -31,7 +31,8 @@
         </ol> 
 
         <p>Para iniciar el test de clic en el siguiente botón y lea las instrucciones de forma cuidadosa</p>
-        <a href="/Paginas/archivo3.html" class="button">Ir a otro archivo</a>
+        
+        <button @click="empezar" class="siguiente">Empezar</button>
     </main>
 </div>
     <div class="Fondos">
@@ -40,131 +41,24 @@
 </body>
   </div>
 </template>
+<script>
+export default{
+  methods:{
+    empezar(){
+      this.$router.push('/ahorcado')
+
+    }
+  }
+}
+</script>
 <style scoped>
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
 
-header {
-    background-color: #0078d4;
-    padding: 10px;
-    text-align: center;
-}
 
-header img {
-    max-width: 100%;
-    height: auto;
-}
-
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
-
-h1 {
-    font-size: 24px;
-    color: #333;
-}
-
-p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-/* Estilos del botón */
-.button {
-    display: inline-block;
-    background-color: #0078d4;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #005dab;
-}
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background-image: linear-gradient(135deg,#00B7D4, #b8fff7,#c2fff8,#d4fff6,#c3fff5,  #e1fff5, #f3fff3);
-    background-size: 500%;
-    animation:fanimado 10s infinite;;
-    
-}
-
-.Fondoa {
-    color:white;
-    text-align: center;
-    margin: 300px 0;
-    font-size: 28px;
-}
+.siguiente{
  
-@keyframes fanimado {
-    0% {
-        background-position: 0%  50%;
-    }
-    50% {
-        background-position: 100%   50%;
-    }
-    100% {
-        background-position:0%  50%;
-    }
+ margin: 10px;
+ border-radius: 5px;
+ font-size: 20px;
+
 }
-
-
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    background-image: linear-gradient(135deg,#00B7D4,  #b8fff7,#c2fff8,#d4fff6,#c3fff5,  #e1fff5, #f3fff3);
-    background-size: 500%;
-    animation:fanimado 10s infinite;;
-    
-}
-
-.Fondos {
-    color:white;
-    text-align: center;
-    margin: 300px 0;
-    font-size: 28px;
-}
-
-.cuadro {
-    border-radius: 32px 32px 32px 32px;
-    -moz-border-radius: 32px 32px 32px 32px;
-    -webkit-border-radius: 32px 32px 32px 32px;
-    border: 4px solid #0bbd70;
-}
-
-@keyframes fanimado {
-    0% {
-        background-position: 0%  50%;
-    }
-    50% {
-        background-position: 100%   50%;
-    }
-    100% {
-        background-position:0%  50%;
-    }
-}
-
-
-
-
 </style>
