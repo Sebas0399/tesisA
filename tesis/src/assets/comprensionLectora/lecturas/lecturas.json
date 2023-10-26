@@ -1,0 +1,79 @@
+{
+    "lecturas": [
+        {
+            
+            "lectura": "Sofia es un flamenco de color rosado que tiene dos alas rosadas, patas negras y pico de color negro. Vive cerca de pequeñas lagunas. Le gusta pararse en una pata..",
+            "preguntas": [
+                "¿Quién es Sofia?",
+                "¿De qué color es Sofia?",
+                "¿Qué le gusta hacer?",
+                "¿Dónde vive Sofia?"
+            ],
+            "opciones": [
+                [
+                    "Flamenco",
+                    "Tigre",
+                    "Leon",
+                    "Gaviota"
+                ],
+                [
+                    "Blanco",
+                    "Rojo",
+                    "Rosado",
+                    "Negro"
+                ],
+                [
+                    "Pararse en una pata",
+                    "Nadar",
+                    "Volar y Nadar",
+                    "Caminar sobre el lodo"
+                ],
+                [
+                    "Rio",
+                    "Laguna",
+                    "Mar",
+                    "Lodo"
+                ]
+            ],
+            "respuestas": [0,2,0,1]
+        },
+        {
+            
+            "lectura": "Mime es un niño alto, tiene una chompa de color azul, un pantalón de color negro y unos zapatos de color blanco. A él le gusta mucho jugar futbol y nadar. En las tardes escucha música en la radio de su papá.",
+            "preguntas": [
+                "¿De qué porte es Mime?",
+                "¿De qué color es su chompa?",
+                "¿Qué le gusta jugar?",
+                "¿De quién es la radio en la que escucha música?"
+            ],
+            "opciones": [
+                [
+                    "Flaco",
+                    "Medio",
+                    "Bajo",
+                    "Alto"
+                ],
+                [
+                    "Azul",
+                    "Blanco",
+                    "Rosado",
+                    "Verde"
+                ],
+                [
+                    "Basket",
+                    "Voley",
+                    "Bolos",
+                    "Futbol"
+                ],
+                [
+                    "Tio",
+                    "Mamá",
+                    "Papá",
+                    "Hermana"
+                ]
+            ],
+            "respuestas": [3,0,3,2]
+        }
+        
+    ]
+}

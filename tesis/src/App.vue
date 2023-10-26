@@ -8,6 +8,8 @@
     <router-link to="/lectura">Lectura</router-link>
     <router-link to="/audio">Audio</router-link>
     <router-link to="/segmentacion">Segmentacion</router-link>
+    <router-link to="/comprension">Comprension</router-link>
+
     <router-link to="/informe">Informe</router-link>
     
   </nav>

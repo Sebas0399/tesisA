@@ -8,12 +8,18 @@ import Lectura from '../modules/lectura/Lectura.vue'
 import Audio from '../modules/audio/Juego.vue'
 import Informe from '../modules/informe/Informe.vue'
 import Segmentacion from '../modules/lecturaNuevo/Lectura.vue'
+import ComprensionLectora from '../modules/comprensionLectora/Juego.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/comprension',
+    name: 'comprension',
+    component: ComprensionLectora
   },
   {
     path: '/acerca',
