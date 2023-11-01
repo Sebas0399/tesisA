@@ -4,18 +4,30 @@
             <div class="col">
                 <img :src=imagen alt="" class="img-fluid">
             </div>
-            <div class="col">
-                <p>{{ lectura }}</p>
-                <div v-for="(pregunta, index) in preguntas" :key="pregunta">
-                    <h4>{{ pregunta }}</h4>
-                    <div class="form-check  text-start" v-for="(opcion, indexOpt) in opciones[index]" :key="opcion"
-                            @click="comprobar(index, indexOpt)" >
-                        <input class="form-check-input" type="radio" :name="pregunta" :id="opcion">
-                        <label class="form-check-label " :for="opcion" >
+            <div v-if="esLectura" class="col">
+                <div v-for="(oracion, index) in oraciones" :key="oracion">
+                    <h4>{{ oracion.oracion }}</h4>
+                    <div class="form-check  text-start" v-for="(opcion, indexOpt) in oracion.opciones" :key="opcion">
+                        <input class="form-check-input" type="radio" :name="oracion.oracion"  :id='opcion+indexOpt' @click="guardarRespuesta(index, indexOpt)">
+                        <label class="form-check-label " :for="opcion">
                             {{ opcion }}
                         </label>
                     </div>
-                   
+
+                </div>
+            </div>
+            <div class="col" v-else>
+                <p>{{ lectura }}</p>
+                <div v-for="(pregunta, index) in preguntas" :key="pregunta">
+                    <h4>{{ pregunta }}</h4>
+                    <div class="form-check  text-start" v-for="(opcion, indexOpt) in opciones[index]" :key="opcion">
+                        <input class="form-check-input" type="radio" :name="pregunta" :id="opcion"
+                            @click="guardarRespuesta(index, indexOpt)">
+                        <label class="form-check-label " :for="opcion">
+                            {{ opcion }}
+                        </label>
+                    </div>
+
                 </div>
 
             </div>
@@ -32,12 +44,15 @@ export default {
     data() {
         return {
             //listalecturas: null,
+            esLectura: true,
             lectura: null,
             preguntas: null,
             opciones: null,
             imagen: null,
             respuestas: null,
+            respuestasSeleccionada: new Map(),
             indexLectura: 0,
+            oraciones: null
         };
     },
     mounted() {
@@ -45,8 +60,11 @@ export default {
 
     },
     methods: {
+        guardarRespuesta(index, indexOpt) {
+            this.respuestasSeleccionada.set(index, indexOpt)
+        },
         cargarLecturas() {
-
+            this.oraciones = listalecturas.oraciones
             this.lectura = listalecturas.lecturas[this.indexLectura].lectura
             this.preguntas = listalecturas.lecturas[this.indexLectura].preguntas
             this.opciones = listalecturas.lecturas[this.indexLectura].opciones
@@ -54,26 +72,38 @@ export default {
             this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
         },
         siguienteLectura() {
+            
+            this.comprobar()
+            this.respuestasSeleccionada = new Map();
+            console.log(this.respuestasSeleccionada)
             this.indexLectura++;
+            if (this.indexLectura==5) {
+                this.esLectura = true
+            }
             this.lectura = listalecturas.lecturas[this.indexLectura].lectura
             this.preguntas = listalecturas.lecturas[this.indexLectura].preguntas
             this.opciones = listalecturas.lecturas[this.indexLectura].opciones
+            this.respuestas = listalecturas.lecturas[this.indexLectura].respuestas
+
             this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
         },
-        comprobar(index, indexOpt) {
-            if (this.respuestas[index] == indexOpt) {
-                console.log("correcta")
+        comprobar() {
+            for (const [key, value] of this.respuestasSeleccionada) {
+
+                if (this.respuestas[key] == value) {
+                    console.log("correcta")
+                }
+                else {
+                    console.log("incorrecta")
+                }
             }
-            else {
-                console.log("incorrecta")
-            }
+
         }
     }
 }
 
 </script>
 <style scoped>
-img {}
 
 p {
     font-size: 20px;

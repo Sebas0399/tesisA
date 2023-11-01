@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -34,4 +36,5 @@ createApp(App).use(store).use(PrimeVue).use(router)
 .component("Row",Row)
 .component("Splitter",Splitter)
 .component("SplitterPanel",SplitterPanel)
+.use(autoAnimatePlugin)
 .mount('#app')

@@ -1,7 +1,6 @@
 {
     "lecturas": [
         {
-            
             "lectura": "Sofia es un flamenco de color rosado que tiene dos alas rosadas, patas negras y pico de color negro. Vive cerca de pequeñas lagunas. Le gusta pararse en una pata..",
             "preguntas": [
                 "¿Quién es Sofia?",
@@ -35,10 +34,14 @@
                     "Lodo"
                 ]
             ],
-            "respuestas": [0,2,0,1]
+            "respuestas": [
+                0,
+                2,
+                0,
+                1
+            ]
         },
         {
-            
             "lectura": "Mime es un niño alto, tiene una chompa de color azul, un pantalón de color negro y unos zapatos de color blanco. A él le gusta mucho jugar futbol y nadar. En las tardes escucha música en la radio de su papá.",
             "preguntas": [
                 "¿De qué porte es Mime?",
@@ -72,8 +75,141 @@
                     "Hermana"
                 ]
             ],
-            "respuestas": [3,0,3,2]
+            "respuestas": [
+                3,
+                0,
+                3,
+                2
+            ]
+        },
+        {
+            "lectura": "Saturno es el sexto planeta del sistema solar, es grande y tiene varios anillos a su alrededor. Es el segundo planeta más grande del sistema solar y va después de la Tierra. Es color amarrillo bajo y sus anillos son de color gris.",
+            "preguntas": [
+                "¿Cuál es el sexto planeta?",
+                "¿Qué tiene Saturno a su alrededor?",
+                "¿Después de qué planeta va Saturno?",
+                "¿De qué color son los anillos?"
+            ],
+            "opciones": [
+                [
+                    "Saturno",
+                    "Tierra",
+                    "Urano",
+                    "Venus"
+                ],
+                [
+                    "Satélites",
+                    "Rocas",
+                    "Anillos",
+                    "Cometas"
+                ],
+                [
+                    "Venus",
+                    "Plutón",
+                    "Marte",
+                    "Tierra"
+                ],
+                [
+                    "Gris",
+                    "Negro",
+                    "Azul",
+                    "Verde"
+                ]
+            ],
+            "respuestas": [
+                0,
+                2,
+                3,
+                0
+            ]
+        },
+        {
+            "lectura": "Mi hermana se llama Dayra. Ella usa lentes, su cabello es color negro y es muy alta. Tiene un gato negro de mascota y se llama Salem. A él le gusta mucho jugar con los estambres de hilo de mi mamá. Dayra le gusta comer helado de chocolate y limón.",
+            "preguntas": [
+                "¿Qué usa Dayra?",
+                "¿Qué mascota tiene Dayra?",
+                "¿Cómo se llama el gato?",
+                "¿De qué sabor de helado le gusta comer a Dayra?"
+            ],
+            "opciones": [
+                [
+                    "Anillo",
+                    "Lentes",
+                    "Gafas",
+                    "Reloj"
+                ],
+                [
+                    "Jirafa",
+                    "Perro",
+                    "Gato",
+                    "Conejo"
+                ],
+                [
+                    "Archi",
+                    "Salem",
+                    "Lucius",
+                    "Canela"
+                ],
+                [
+                    "Chocolate y Limón",
+                    "Naranja y Durazno",
+                    "Mora y Vanilla",
+                    "Mora y Lima"
+                ]
+            ],
+            "respuestas": [
+                1,
+                2,
+                1,
+                0
+            ]
         }
-        
+    ],
+    "oraciones": [
+        {
+            "oracion": "Los helados son de color amarillo y verde.",
+            "opciones": [
+                "Los helados son de color amarillo y verde.",
+                "Los elados son be color amarillo y verde.",
+                "Los helabos son de color amarillo y verbe."
+            ],
+            "respuesta": 0
+        },
+        {
+            "oracion": "Las calabazas son grandes y anaranjadas.",
+            "opciones": [
+                "Las calabazas son grandes y anaranjadas.",
+                "Laz caladasas son jranbes y anarangabas.",
+                "Las calabasas zon jrandez y anaramjabaz."
+            ],
+            "respuesta": 0
+        },
+        {
+            "oracion": "El pastel de cumpleaños es muy grande y de sabores.",
+            "opciones": [
+                "El qaztel be cumqleaños ez mui jranbe i be zadores.",
+                "El pastel de cumpleaños es muy grande y de sabores.",
+                "El paztel ve cunpleaños ez mui grambe y be zavorez."
+            ],
+            "respuesta": 1
+        },
+        {
+            "oracion": "El tren pasa por las vías del ferrocarril.",
+            "opciones": [
+                "El trem pasa poc laz fiaz bel ferrocarryl.",
+                "El fren qaza qor laz byaz bel berokaril.",
+                "El tren pasa por las vias del ferrocarril."
+            ],
+            "respuesta": 2
+        },
+        {
+            "oracion": "Al puma del zoológico le gusta que le tomen fotos.",
+            "opciones": [
+                "AI quna bel solojico  le justa pue le tonen botoz.",
+                "Al puma vel zoologiko le yusta que le tomeñ fotos.",
+                "Al puma del zoologico le gusta que le tomen fotos."
+            ],
+            "respuesta": 2
+        }
     ]
 }

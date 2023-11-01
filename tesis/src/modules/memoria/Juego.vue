@@ -1,76 +1,86 @@
 <template>
-    <div class="game-board ">
-      <WordCard
-        v-for="(word, index) in words"
-        :key="index"
-        :word="word.content"
-        :isMatched="word.isMatched"
-        :isFlipped="isWordFlipped(index)"
-        @flip-card="handleFlipCard(index, word, 'word')"
-      />
-      <ImageCard
-        v-for="(image, index) in images"
-        :key="index"
-        :image="image.content"
-        :isMatched="image.isMatched"
-        :isFlipped="isImageFlipped(index)"
-        @flip-card="handleFlipCard(index, image, 'image')"
-      />
-      <div class="score">Score: {{ score }}</div>
-    </div>
-  </template>
+  <div class="score">Puntaje: {{ score }}</div>
+  <div class="score">Intentos: {{ intentos }}</div>
+  <div class="game-board ">
+    <WordCard v-for="(word, index) in words" :key="index" :word="word.content" :isMatched="word.isMatched" :isEnabled="habilitado"
+      :imgSrc="imagenCarta" :isFlipped="isWordFlipped(index)" @flip-card="handleFlipCard(index, word, 'word')"
+      v-auto-animate />
+
+  </div>
+  <div v-if="intentos == 0 && contadorJuego != 4">
+    <Button @click="siguienteJuego"> Siguiente</Button>
+  </div>
+  <div v-if="contadorJuego == 4 && intentos == 0">
+    <Button @click="siguientePagina"> Siguiente</Button>
+
+  </div>
+</template>
   
-  <script>
-  import WordCard from './CartaPalabra.vue';
-  import ImageCard from './CartaImagen.vue';
-  
-  export default {
-    components: {
-      WordCard,
-      ImageCard,
+<script>
+import WordCard from './CartaPalabra.vue';
+import palabrasJson from "@/assets/memoria/grupos.json";
+import imagenCarta from "@/assets/memoria/backCard.png";
+export default {
+  components: {
+    WordCard,
+  },
+  data() {
+    return {
+      words: null,
+      imagenCarta: null,
+      flippedCards: [],
+      score: 0,
+      intentos: 2,
+      contadorJuego: 1,
+      habilitado:false
+    };
+  },
+  watch: {
+    intentos: function (newValue, oldValue) {
+      if (newValue <= 0) {
+        this.habilitado=true
+      }
     },
-    data() {
-      return {
-        words: [
-          { content: 'apple', isMatched: false },
-          { content: 'banana', isMatched: false },
-          { content: 'Pájaro', isMatched: false },
-          { content: 'Pez', isMatched: false },
-        ],
-        images: [
-          { content: 'assets/images/apple.png', isMatched: false },
-          { content: 'assets/images/apple.png', isMatched: false },
-          { content: 'assets/images/banana.png', isMatched: false },
-          { content: 'assets/images/apple.png', isMatched: false },
-        ],
-        flippedCards: [],
-        score: 0,
-      };
+    contadorJuego:function(newValue,oldValue){
+      console.log(oldValue)
+      console.log(newValue)
+
+    }
+  },
+  created() {
+    this.imagenCarta = imagenCarta
+    this.cargarPalabras();
+
+  },
+  methods: {
+    siguientePagina(){
+      this.$router.push('/audio')
     },
-    created() {
-      this.shuffleArrays();
+    siguienteJuego() {
+      this.words = []
+      this.intentos = 2
+      this.habilitado=false
+      var pal = palabrasJson.palabras[this.contadorJuego++]
+      pal.forEach(x => {
+        var cont = { "content": x, "isMatched": false }
+        this.words.push(cont)
+        this.words.push(cont)
+      })
+      this.words.sort(() => Math.random() - 0.5)
     },
-    methods: {
-      shuffleArrays() {
-        this.words = this.shuffleArray(this.words);
-        this.images = this.shuffleArray(this.images);
-      },
-      shuffleArray(array) {
-        let currentIndex = array.length,
-          temporaryValue,
-          randomIndex;
-  
-        while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-  
-        return array;
-      },
-      handleFlipCard(index, content, type) {
+    cargarPalabras() {
+      this.words = []
+      var pal = palabrasJson.palabras[1]
+      pal.forEach(x => {
+        var cont = { "content": x, "isMatched": false }
+        this.words.push(cont)
+        this.words.push(cont)
+      })
+      this.words.sort(() => Math.random() - 0.5)
+
+    },
+
+    handleFlipCard(index, content, type) {
       if (this.flippedCards.length < 2 && !content.isMatched) {
         content.isFlipped = true; // Voltear la carta
         this.flippedCards.push({ index, content, type });
@@ -88,98 +98,63 @@
           card1.content.isFlipped = false; // Voltear la carta de regreso
           card2.content.isFlipped = false; // Voltear la carta de regreso
           this.flippedCards = [];
+          this.intentos--;
         }, 1000);
       } else {
-        this.score += 1;
-        card1.content.isMatched = true; // Marcar la carta como emparejada
-        card2.content.isMatched = true; // Marcar la carta como emparejada
-        this.flippedCards = [];
+        setTimeout(() => {
+          this.score += 1;
+          card1.content.isMatched = true; // Marcar la carta como emparejada
+          card2.content.isMatched = true; // Marcar la carta como emparejada
+          this.flippedCards = [];
+        }, 1000)
+
       }
     },
 
-      cast(palabra) {
-        if (palabra.includes('/')) {
-          return palabra.split('/')[2].replace(/\.[^/.]+$/, '');
-        } else {
-          return palabra;
-        }
-      },
-      resetFlippedCards() {
-        this.flippedCards.forEach(card => {
-          card.content.isFlipped = false;
-        });
-        this.flippedCards = [];
-      },
-      isWordMatched(index) {
-        return (
-          this.flippedCards.some(
-            card => card.content.content === this.words[index].content && card.type === 'word'
-          ) || this.words[index].isMatched
-        );
-      },
-      isImageMatched(index) {
-        return (
-          this.flippedCards.some(
-            card => card.content.content === this.images[index].content && card.type === 'image'
-          ) || this.images[index].isMatched
-        );
-      },
-      isWordFlipped(index) {
-        return (
-          this.flippedCards.some(
-            card =>
-              card.index === index &&
-              card.content.content === this.words[index].content &&
-              card.type === 'word'
-          )
-        );
-      },
-      isImageFlipped(index) {
-        return (
-          this.flippedCards.some(
-            card =>
-              card.index === index &&
-              card.content.content === this.images[index].content &&
-              card.type === 'image'
-          )
-        );
-      },
+    cast(palabra) {
+      if (palabra.includes('/')) {
+        return palabra.split('/')[2].replace(/\.[^/.]+$/, '');
+      } else {
+        return palabra;
+      }
     },
-  };
-  </script>
+   
+    
+
+    isWordFlipped(index) {
+      return (
+        this.flippedCards.some(
+          card =>
+            card.index === index &&
+            card.content.content === this.words[index].content &&
+            card.type === 'word'
+        )
+      );
+    },
+
+  },
+};
+</script>
   
-  <style scoped>
-  .card.matched {
-    border: 2px solid green;
-  }
-  
-  .game-board {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .card {
-    width: 100px;
-    height: 150px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 10px;
-    margin: 10px;
-  }
-  
-  .card img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-  
-  .score {
-    margin-top: 20px;
-    font-size: 24px;
-  }
-  </style>
+<style scoped>
+.card.matched {
+  border: 2px solid green;
+}
+
+.game-board {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+
+
+
+.score {
+  margin-top: 20px;
+  font-size: 24px;
+}
+</style>
   
