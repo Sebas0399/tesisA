@@ -35,28 +35,45 @@ export default {
             nombre: '',
             ahorcado: '',
             audio: '',
+            memoria:'',
+            comprension:'',
             todo: null
         };
     },
     mounted() {
         const jsonData = localStorage.getItem('informe');
         const data = JSON.parse(jsonData);
+
         const jsonDataAhorcado = localStorage.getItem('informeAhorcado');
         const dataAhorcado = JSON.parse(jsonDataAhorcado);
+
         const jsonDataAudio = localStorage.getItem('informeAudio');
         const dataAudio = JSON.parse(jsonDataAudio);
-        console.log(data)
-        console.log(dataAhorcado)
-        console.log(dataAudio)
+
+        const jsonDataMemoria = localStorage.getItem('informeMemoria');
+        const dataMemoria = JSON.parse(jsonDataMemoria);
+
+        const jsonDataSegmentacion = localStorage.getItem('informeSegmentacion');
+        const dataSegmentacion= JSON.parse(jsonDataSegmentacion);
+
+        const jsonDataComprension = localStorage.getItem('informeComprension');
+        const dataComprension= JSON.parse(jsonDataComprension);
+        
+
         this.nombre = data.nombre; // Esto te da el nombre guardado en el almacenamiento local
         this.ahorcado = dataAhorcado.ahorcado
         this.audio = dataAudio.audio
+        this.memoria=dataMemoria.memoria
+        this.segmentacion=dataSegmentacion.segmentacion
+        this.comprension=dataComprension.comprension
+        console.log(this.comprension)
         this.todo = [
             { nombre: "Ahorcado", puntaje: this.ahorcado },
             { nombre: "Audio", puntaje: this.audio },
-            { nombre: "Lectura", puntaje: this.lectura },
             { nombre: "Segmentacion", puntaje: this.segmentacion },
-            { nombre: "Memoria", puntaje: this.memoria }]
+            { nombre: "Memoria", puntaje: this.memoria },
+            { nombre: "Comprension", puntaje: this.comprension },
+        ]
 
     },
     methods: {

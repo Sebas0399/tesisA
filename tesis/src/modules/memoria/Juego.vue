@@ -1,10 +1,9 @@
 <template>
-  <div class="score">Puntaje: {{ score }}</div>
   <div class="score">Intentos: {{ intentos }}</div>
   <div class="game-board ">
-    <WordCard v-for="(word, index) in words" :key="index" :word="word.content" :isMatched="word.isMatched" :isEnabled="habilitado"
-      :imgSrc="imagenCarta" :isFlipped="isWordFlipped(index)" @flip-card="handleFlipCard(index, word, 'word')"
-      v-auto-animate />
+    <WordCard v-for="(word, index) in words" :key="index" :word="word.content" :isMatched="word.isMatched"
+      :isEnabled="habilitado" :imgSrc="imagenCarta" :isFlipped="isWordFlipped(index)"
+      @flip-card="handleFlipCard(index, word, 'word')" v-auto-animate />
 
   </div>
   <div v-if="intentos == 0 && contadorJuego != 4">
@@ -30,22 +29,19 @@ export default {
       imagenCarta: null,
       flippedCards: [],
       score: 0,
-      intentos: 2,
+      intentos: 5,
       contadorJuego: 1,
-      habilitado:false
+      habilitado: false,
+      puntuacion:0
     };
   },
   watch: {
     intentos: function (newValue, oldValue) {
       if (newValue <= 0) {
-        this.habilitado=true
+        this.habilitado = true
       }
     },
-    contadorJuego:function(newValue,oldValue){
-      console.log(oldValue)
-      console.log(newValue)
-
-    }
+   
   },
   created() {
     this.imagenCarta = imagenCarta
@@ -53,13 +49,18 @@ export default {
 
   },
   methods: {
-    siguientePagina(){
+    siguientePagina() {
+      const data = {
+        comprension: this.puntuacion*10
+      };
+      const jsonData = JSON.stringify(data);
+      localStorage.setItem('informeMemoria', jsonData);
       this.$router.push('/audio')
     },
     siguienteJuego() {
       this.words = []
       this.intentos = 2
-      this.habilitado=false
+      this.habilitado = false
       var pal = palabrasJson.palabras[this.contadorJuego++]
       pal.forEach(x => {
         var cont = { "content": x, "isMatched": false }
@@ -82,7 +83,7 @@ export default {
 
     handleFlipCard(index, content, type) {
       if (this.flippedCards.length < 2 && !content.isMatched) {
-        content.isFlipped = true; // Voltear la carta
+        content.isFlipped = true; 
         this.flippedCards.push({ index, content, type });
 
         if (this.flippedCards.length === 2) {
@@ -95,14 +96,15 @@ export default {
 
       if (this.cast(card1.content.content) !== this.cast(card2.content.content)) {
         setTimeout(() => {
-          card1.content.isFlipped = false; // Voltear la carta de regreso
-          card2.content.isFlipped = false; // Voltear la carta de regreso
+          card1.content.isFlipped = false; 
+          card2.content.isFlipped = false; 
           this.flippedCards = [];
           this.intentos--;
         }, 1000);
       } else {
         setTimeout(() => {
           this.score += 1;
+          this.puntuacion=this.puntuacion+1
           card1.content.isMatched = true; // Marcar la carta como emparejada
           card2.content.isMatched = true; // Marcar la carta como emparejada
           this.flippedCards = [];
@@ -118,8 +120,8 @@ export default {
         return palabra;
       }
     },
-   
-    
+
+
 
     isWordFlipped(index) {
       return (
@@ -138,13 +140,13 @@ export default {
   
 <style scoped>
 .card.matched {
-  border: 2px solid green;
+  border: 5px solid green;
 }
 
 .game-board {
   display: flex;
   flex-wrap: wrap;
-  max-width: 900px;
+  max-width: 700px;
   margin: 0 auto;
 }
 

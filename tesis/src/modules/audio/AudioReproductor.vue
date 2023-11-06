@@ -14,4 +14,9 @@
     }
   }
   </script>
+  <style scoped>
+  audio{
+    margin: 20px;
+  }
+</style>
   

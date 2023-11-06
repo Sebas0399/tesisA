@@ -37,7 +37,6 @@ export default {
       };
       const jsonData = JSON.stringify(data);
 
-      // Guardar en el almacenamiento local del navegador
       localStorage.setItem('informe', jsonData);
       
     }

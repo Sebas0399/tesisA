@@ -1,14 +1,13 @@
 <template>
     <div class="container text-center">
         <div class="row">
-            <div class="col">
-                <img :src=imagen alt="" class="img-fluid">
-            </div>
+            
             <div v-if="esLectura" class="col">
                 <div v-for="(oracion, index) in oraciones" :key="oracion">
                     <h4>{{ oracion.oracion }}</h4>
-                    <div class="form-check  text-start" v-for="(opcion, indexOpt) in oracion.opciones" :key="opcion">
-                        <input class="form-check-input" type="radio" :name="oracion.oracion"  :id='opcion+indexOpt' @click="guardarRespuesta(index, indexOpt)">
+                    <div class="form-check " v-for="(opcion, indexOpt) in oracion.opciones" :key="opcion">
+                        <input class="form-check-input" type="radio" :name="oracion.oracion" :id='opcion + indexOpt'
+                            @click="guardarRespuesta(index, indexOpt)">
                         <label class="form-check-label " :for="opcion">
                             {{ opcion }}
                         </label>
@@ -43,7 +42,6 @@ export default {
 
     data() {
         return {
-            //listalecturas: null,
             esLectura: true,
             lectura: null,
             preguntas: null,
@@ -52,7 +50,9 @@ export default {
             respuestas: null,
             respuestasSeleccionada: new Map(),
             indexLectura: 0,
-            oraciones: null
+            oraciones: null,
+            oracionesRespuestas: [],
+            puntuacion: 0,
         };
     },
     mounted() {
@@ -65,6 +65,12 @@ export default {
         },
         cargarLecturas() {
             this.oraciones = listalecturas.oraciones
+            for (let index = 0; index < this.oraciones.length; index++) {
+                const element = this.oraciones[index].respuesta;
+                this.oracionesRespuestas.push(element)
+            }
+            console.log(this.oracionesRespuestas)
+
             this.lectura = listalecturas.lecturas[this.indexLectura].lectura
             this.preguntas = listalecturas.lecturas[this.indexLectura].preguntas
             this.opciones = listalecturas.lecturas[this.indexLectura].opciones
@@ -72,31 +78,64 @@ export default {
             this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
         },
         siguienteLectura() {
-            
+
             this.comprobar()
             this.respuestasSeleccionada = new Map();
-            console.log(this.respuestasSeleccionada)
             this.indexLectura++;
-            if (this.indexLectura==5) {
+            console.log(this.indexLectura)
+            if (this.indexLectura == 4) {
                 this.esLectura = true
-            }
-            this.lectura = listalecturas.lecturas[this.indexLectura].lectura
-            this.preguntas = listalecturas.lecturas[this.indexLectura].preguntas
-            this.opciones = listalecturas.lecturas[this.indexLectura].opciones
-            this.respuestas = listalecturas.lecturas[this.indexLectura].respuestas
+                this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
 
-            this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
+            }
+            else if (this.indexLectura > 4) {
+                const data = {
+                    comprension: this.puntuacion
+                };
+                const jsonData = JSON.stringify(data);
+                localStorage.setItem('informeComprension', jsonData);
+
+                this.$router.push('/informe')
+
+
+            }
+            else {
+                this.lectura = listalecturas.lecturas[this.indexLectura].lectura
+                this.preguntas = listalecturas.lecturas[this.indexLectura].preguntas
+                this.opciones = listalecturas.lecturas[this.indexLectura].opciones
+                this.respuestas = listalecturas.lecturas[this.indexLectura].respuestas
+
+                this.imagen = require('@/assets/comprensionLectora/imagenes/Lectura' + this.indexLectura + '.jpg')
+            }
+
         },
         comprobar() {
-            for (const [key, value] of this.respuestasSeleccionada) {
+            if (this.esLectura) {
+                for (const [key, value] of this.respuestasSeleccionada) {
 
-                if (this.respuestas[key] == value) {
-                    console.log("correcta")
-                }
-                else {
-                    console.log("incorrecta")
+                    if (this.oracionesRespuestas[key] == value) {
+                        console.log("correcta")
+                        this.puntuacion = this.puntuacion + 2.5
+                    }
+                    else {
+                        console.log("incorrecta")
+                    }
                 }
             }
+            else {
+                for (const [key, value] of this.respuestasSeleccionada) {
+
+                    if (this.respuestas[key] == value) {
+                        console.log("correcta")
+                        this.puntuacion = this.puntuacion + 2.5
+
+                    }
+                    else {
+                        console.log("incorrecta")
+                    }
+                }
+            }
+
 
         }
     }
@@ -104,8 +143,7 @@ export default {
 
 </script>
 <style scoped>
-
 p {
     font-size: 20px;
 }
-</style>
+</style> 

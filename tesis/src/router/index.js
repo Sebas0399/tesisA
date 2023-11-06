@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
+import Bienvenida from '../components/Bienvenida.vue'
 
 import Ahorcado from '../modules/ahorcado/Ahorcado.vue'
 import Memoria from '../modules/memoria/Juego.vue'
-import Lectura from '../modules/lectura/Lectura.vue'
 import Audio from '../modules/audio/Juego.vue'
 import Informe from '../modules/informe/Informe.vue'
-import Segmentacion from '../modules/lecturaNuevo/Lectura.vue'
+import Segmentacion from '../modules/segmentacion/Lectura.vue'
 import ComprensionLectora from '../modules/comprensionLectora/Juego.vue'
 
 const routes = [
@@ -15,6 +15,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/inicio',
+    name: 'inicio',
+    component: Bienvenida
   },
   {
     path: '/comprension',
@@ -43,12 +48,7 @@ const routes = [
     component: Memoria
 
   },
-  {
-    path: '/lectura',
-    name: 'lectura',
-    component: Lectura
-
-  },
+ 
   {
     path: '/audio',
     name: 'audio',

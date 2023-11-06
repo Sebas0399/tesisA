@@ -6,11 +6,8 @@
             "Lampara",
             "Dólar",
             "Joven",
-            "Ahora",
-            "Música",
-            "Raíz",
-            "Búfalo",
-            "Búho"
+            "Ahora"
+           
         ],
         "2": [
             "Dibujo",
@@ -18,35 +15,25 @@
             "Chivo",
             "Pavo",
             "Clavel",
-            "Vampiro",
-            "Cavar",
-            "Sorbete",
-            "Tubo",
-            "Bota"
+            "Vampiro"
+           
         ],
         "3": [
             "Olla",
-            "Zanahoria zorro",
+            "Zanahoria",
             "Humo",
             "Hielo",
             "Campo",
-            "Jarro",
-            "Campana",
-            "Campaña",
-            "Llanta",
-            "Laso"
+            "Jarro"
+         
         ],
         "4": [
             "Ala",
             "ola",
             "hola",
             "arroz",
-            "error",
-            "ojo",
             "horno",
-            "Silencio",
-            "burbuja",
-            "jefe"
+            "burbuja"
         ]
     }
 }
