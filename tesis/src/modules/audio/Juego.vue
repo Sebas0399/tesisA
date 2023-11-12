@@ -86,8 +86,6 @@ export default {
 div{
   padding: 20px;
 }
-audio-player{
-  margin: 100px;
-}
+
 </style>
   

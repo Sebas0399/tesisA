@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="ejercicio">
+      <h1>{{ palabraActual }}</h1>
       <input v-if="indiceActivo !== null" :key="indiceActivo" class="entrada-palabra" ref="wordRef"
-        v-model="palabraActual" />
+        v-model="palabraComparar" />
     </div>
     <button v-if="empezar" @click="comenzarEjercicio">Empezar</button>
     <button v-if="jugar" @click="siguientePalabra">Siguiente</button>
@@ -22,9 +23,9 @@ export default {
       indiceActivo: null,
       palabraActual: "",
       aciertos: [],
-      empezar:true,
-      jugar:false,
-      fin:false
+      empezar: true,
+      jugar: false,
+      fin: false
     };
   },
   methods: {
@@ -39,8 +40,8 @@ export default {
 
     },
     comenzarEjercicio() {
-      this.empezar=false
-      this.jugar=true
+      this.empezar = false
+      this.jugar = true
       this.indiceActivo = 0;
       this.estaSegmentada = new Array(this.palabras.length).fill(false);
       this.palabraActual = this.palabras[0];
@@ -52,9 +53,9 @@ export default {
         this.indiceActivo++;
         this.palabraActual = this.palabras[this.indiceActivo];
       } else {
-        this.jugar=false
-        this.empezar=false
-        this.fin=true
+        this.jugar = false
+        this.empezar = false
+        this.fin = true
 
       }
     },
@@ -81,10 +82,12 @@ export default {
 .ejercicio {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .entrada-palabra {
-  font-size: 24px;
+  font-size:30px;
   margin: auto;
   text-align: center;
   width: 80%;
