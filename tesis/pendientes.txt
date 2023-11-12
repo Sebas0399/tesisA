@@ -1,0 +1,9 @@
+*pagina acerca
+*centrar cartas
+*separar mas items audio
+
+*segmentacion(mostrar oracion, luego reescribir con los slash)
+*imagenes mas pequeñas (comprension)
+*mostrar respuestas(informe)
+*cambiar fondo y mas separacion(comprension lectora (oraciones))
+*colores para las palabras de el juego de memoria
