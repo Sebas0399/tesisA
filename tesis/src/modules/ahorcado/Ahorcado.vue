@@ -1,9 +1,21 @@
 <template>
+ 
+  <Dialog v-model:visible="visible" :pt="{
+    mask: {
+      style: 'backdrop-filter: blur(2px)'
+    }
+  }" modal header="Instrucciones" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+    <Instruccion :titulo=instruccion.titulo :instruccion=instruccion.instruccion></Instruccion>
+    <div class="btn-centrar">
+      <button @click="visible = false">Empezar</button>
+
+    </div>
+  </Dialog>
   <div class="contenedor">
     <div class="tablero">
       <h1>Juego del ahorcado</h1>
       <h2>Intentos Restantes: </h2>
-      <Knob v-model="intentosTotales"  :max="5" :step="-1" readonly valueColor="MediumTurquoise" rangeColor="SlateGray" />
+      <Knob v-model="intentosTotales" :max="7" :step="-1" readonly valueColor="MediumTurquoise" rangeColor="SlateGray" />
 
       <div class="palabra">
         <span v-for="(letra, indice) in palabraOculta" :key="indice">{{ letra }}</span>
@@ -22,22 +34,27 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="fin" v-if="fin">
-    <button @click="siguientePalabra" class="siguiente">Siguiente</button>
+    <div class="fin" v-if="fin">
+      <button @click="siguientePalabra" class="siguiente">Siguiente</button>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import palabrasRaw from "@/assets/ahorcado/palabras.json"
+import Instruccion from "@/components/Instruccion.vue"
 
 export default {
+  components: {
+    Instruccion,
+  },
   data() {
     return {
+      visible: false,
       aciertos: 0,
       imagenActual: "assets/flor/est1.png",
       palabra: null,
-      intentosTotales: 5,
+      intentosTotales: 7,
       alfabeto: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
       letraSeleccionada: "",
       numParticulas: 10,
@@ -48,32 +65,40 @@ export default {
       palabraActualIndex: 0,
       tecladoDeshabilitado: false,
       contadorCorrecto: 0,
+      instruccion: {
+        titulo: "Actividad del Ahorcado",
+        instruccion: "Selecciona las letras correctas para formar una palabra. Cada letra que selecciones mal forma la imagen de una flor. Trata de formar la flor."
+      }
     };
+  },
+  mounted() {
+    this.visible = true
+
   },
   created() {
     this.cargarPalabras();
   },
   methods: {
-    obtenerPalabrasAleatorias(cantidad,palabras) {
+    obtenerPalabrasAleatorias(cantidad, palabras) {
       const palabrasAleatorias = [];
       for (let i = 0; i < cantidad; i++) {
         const indiceAleatorio = Math.floor(Math.random() * palabras.length);
+        console.log(palabras[indiceAleatorio])
         palabrasAleatorias.push(palabras[indiceAleatorio]);
       }
       return palabrasAleatorias;
     },
     cargarPalabras() {
-      axios.get('/assets/ahorcado/palabras.json')
-        .then(response => {
-          const palabras = response.data.palabras;
-          this.palabrasAdivinar = this.obtenerPalabrasAleatorias(5,palabras);
-          this.palabra = this.palabrasAdivinar[this.palabraActualIndex];
-          this.palabraOculta = Array(this.palabra.length).fill("_");
-          console.log(this.palabrasAdivinar)
-        })
-        .catch(error => {
-          console.error('Error cargando las palabras:', error);
-        });
+
+
+      const palabras = palabrasRaw.palabras;
+
+      this.palabrasAdivinar = this.obtenerPalabrasAleatorias(5, palabras);
+      this.palabra = this.palabrasAdivinar[this.palabraActualIndex];
+      this.palabraOculta = Array(this.palabra.length).fill("_");
+      console.log(this.palabrasAdivinar)
+
+
     },
     obtenerLetra(letra) {
       if (this.palabra.includes(letra)) {
@@ -136,7 +161,7 @@ export default {
       if (this.palabraActualIndex < this.palabrasAdivinar.length) {
         this.palabra = this.palabrasAdivinar[this.palabraActualIndex];
         this.palabraOculta = Array(this.palabra.length).fill("_");
-        this.intentosTotales = 5;
+        this.intentosTotales = 7;
         this.aciertos = 0;
         this.errores = 0;
         this.fin = false;
@@ -151,7 +176,7 @@ export default {
         };
         const jsonData = JSON.stringify(data);
         localStorage.setItem('informeAhorcado', jsonData);
-        window.alert(this.contadorCorrecto)
+        
         this.$router.push('/memoria')
 
       }
@@ -184,6 +209,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  background-image: url("../../assets/fondos/Fondo_Ahorcado.jpg");
+  background-size: 100% 100%;
+
 }
 
 /* Estilos para el teclado */
@@ -235,8 +264,9 @@ span {
 img {
   width: 300px;
 }
-.siguiente{
- 
+
+.siguiente {
+
   margin: 10px;
   border-radius: 5px;
   font-size: 20px;
@@ -248,4 +278,24 @@ img {
   cursor: pointer;
 }
 
+.fin {
+  margin-top: auto;
+}
+
+.btn-centrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-centrar button {
+  background-color: #69f3b7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.btn-centrar button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+}
 </style>

@@ -1,30 +1,33 @@
     
 
 <template>
-    <DataTable :value="todo" tableStyle="min-width: 50rem">
-        <template #header>
-            <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-                <span class="text-xl text-900 font-bold">Informe de:{{ nombre }}</span>
+    <div class="contenedor">
 
-            </div>
-        </template>
-        <Column field="nombre" header="Nombre"></Column>
-        <Column field="puntaje" header="Puntaje" sortable>
-            <template #body="slotProps">
-                <Rating :modelValue="slotProps.data.puntaje / 10" readonly :cancel="false" />
+        <DataTable :value="todo" tableStyle="min-width: 70rem">
+            <template #header>
+                <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                    <span class="text-xl text-900 font-bold">Informe de:{{ nombre }}</span>
 
+                </div>
             </template>
-        </Column>
-        <Column header="Porcentaje">
-            <template #body="slotProps">
-                {{ slotProps.data.puntaje }}%
-            </template>
-        </Column>
+            <Column field="nombre" header="Nombre"></Column>
+            <Column field="puntaje" header="Puntaje" sortable>
+                <template #body="slotProps">
+                    <Rating :modelValue="slotProps.data.puntaje/10" readonly :cancel="false" />
 
-        <template #footer> In total there are {{ todo ? todo.length : 0 }} todo.
-            <Button @click="resetInforme">Reset</Button>
-        </template>
-    </DataTable>
+                </template>
+            </Column>
+            <Column header="Porcentaje">
+                <template #body="slotProps">
+                    {{ slotProps.data.puntaje*2 }}%
+                </template>
+            </Column>
+
+            <template #footer>
+                <Button @click="resetInforme">Reiniciar</Button>
+            </template>
+        </DataTable>
+    </div>
 </template>
   
 <script>
@@ -35,8 +38,8 @@ export default {
             nombre: '',
             ahorcado: '',
             audio: '',
-            memoria:'',
-            comprension:'',
+            memoria: '',
+            comprension: '',
             todo: null
         };
     },
@@ -54,19 +57,23 @@ export default {
         const dataMemoria = JSON.parse(jsonDataMemoria);
 
         const jsonDataSegmentacion = localStorage.getItem('informeSegmentacion');
-        const dataSegmentacion= JSON.parse(jsonDataSegmentacion);
+        const dataSegmentacion = JSON.parse(jsonDataSegmentacion);
 
         const jsonDataComprension = localStorage.getItem('informeComprension');
-        const dataComprension= JSON.parse(jsonDataComprension);
-        
+        const dataComprension = JSON.parse(jsonDataComprension);
+
 
         this.nombre = data.nombre; // Esto te da el nombre guardado en el almacenamiento local
-        this.ahorcado = dataAhorcado.ahorcado
-        this.audio = dataAudio.audio
-        this.memoria=dataMemoria.memoria
-        this.segmentacion=dataSegmentacion.segmentacion
-        this.comprension=dataComprension.comprension
-        console.log(this.comprension)
+        //50 maximo puntaje
+        this.ahorcado = this.cacularPuntaje(50, dataAhorcado.ahorcado)
+        //50 maximo puntaje
+        this.audio = this.cacularPuntaje(50, dataAudio.audio)
+        //240 maximo puntaje
+        this.memoria = this.cacularPuntaje(240, dataMemoria.memoria)
+        //
+        this.segmentacion =  this.cacularPuntaje(50, dataSegmentacion.segmentacion)
+        this.comprension = this.cacularPuntaje(50, dataComprension.comprension)
+        console.log(this.ahorcado)
         this.todo = [
             { nombre: "Ahorcado", puntaje: this.ahorcado },
             { nombre: "Audio", puntaje: this.audio },
@@ -79,7 +86,11 @@ export default {
     methods: {
         resetInforme() {
             localStorage.clear();
+            this.$router.push("/")
+        },
+        cacularPuntaje(maximo, acutal) {
 
+            return (acutal * 50) / maximo;
         }
     }
 
@@ -87,5 +98,23 @@ export default {
 }
 </script>
   
-<style scoped></style>
-  
+<style scoped>
+.contenedor {
+    background-image: url("../../assets/fondos/Fondo_Resultados.jpeg");
+    background-size: 100% 100%;
+    min-height: 100VH;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.tabla {
+    border-radius: 2rem;
+    margin: 10rem 2rem;
+    border-width: 2px;
+    font-size: 30px;
+
+}
+</style>

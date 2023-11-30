@@ -1,20 +1,20 @@
 <template>
-  <nav>
-   
-
-    <router-link to="/">Home</router-link> |
-    <router-link to="/ahorcado">Ahorcado</router-link>
-    <router-link to="/memoria">Memoria</router-link>
-    <router-link to="/audio">Audio</router-link>
-    <router-link to="/segmentacion">Segmentacion</router-link>
-    <router-link to="/comprension">Comprension</router-link>
-
-    <router-link to="/informe">Informe</router-link>
-    
-  </nav>
-  <router-view/>
+    <Navbar />
+    <router-view />
+  
 </template>
-
+<script>
+import Navbar from '@/components/Navbar.vue';
+export default {
+  components: {
+    Navbar,
+  },
+  mounted() {
+    // Cambiar el título de la página
+    document.title = 'Dislexteska';
+  }
+};
+</script>
 <style>
 
 #app {

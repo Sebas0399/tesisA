@@ -1,5 +1,5 @@
 <template>
-    <audio controls ref="audio" :src="audioSrc" autoplay></audio>
+    <audio controls ref="audio" :src="audioSrc"></audio>
   </template>
   
   <script>

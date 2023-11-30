@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Bienvenida from '../components/Bienvenida.vue'
+import Instruccciones from '../components/Instrucciones.vue'
 
 import Ahorcado from '../modules/ahorcado/Ahorcado.vue'
 import Memoria from '../modules/memoria/Juego.vue'
@@ -15,6 +16,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/instrucciones',
+    name: 'instrucciones',
+    component: Instruccciones
   },
   {
     path: '/inicio',

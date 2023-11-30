@@ -16,15 +16,16 @@ import DataView from 'primevue/dataview';
 import Rating from 'primevue/rating';
 import Tag from 'primevue/tag';
 import Button from 'primevue/button';
-
+import Dialog from 'primevue/dialog';
 import Splitter from 'primevue/splitter';
 import SplitterPanel from 'primevue/splitterpanel';
-
+import Toast from 'primevue/toast';
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-
-createApp(App).use(store).use(PrimeVue).use(router)
+import ToastService from 'primevue/toastservice';
+createApp(App).use(store).use(PrimeVue).use(router).use(ToastService)
+.use(autoAnimatePlugin)
 .component("Knob",Knob)
 .component("DataView",DataView)
 .component("Rating",Rating)
@@ -36,5 +37,7 @@ createApp(App).use(store).use(PrimeVue).use(router)
 .component("Row",Row)
 .component("Splitter",Splitter)
 .component("SplitterPanel",SplitterPanel)
-.use(autoAnimatePlugin)
+.component("Dialog",Dialog)
+.component("Toast",Toast)
+
 .mount('#app')
